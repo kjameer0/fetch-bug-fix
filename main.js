@@ -2,13 +2,21 @@ const pokemonDisplay = document.getElementById("search-list");
 const searchInput = document.getElementById("search");
 
 searchInput.addEventListener("keyup", async () => {
+  const searchString = searchInput.value;
+  if (searchString.length === 0) {
+    return;
+  }
   const pokemonList = await getPokemonNames();
   pokemonDisplay.textContent = "";
-  const searchString = searchInput.value;
   const filteredPokemonList = pokemonList.filter((pokemon) =>
     pokemon.name.includes(searchString)
   );
-  pokemonDisplay.textContent = JSON.stringify(filteredPokemonList);
+  const pokemonListElements = filteredPokemonList.map((pokemon) => {
+    return pokemonInfoFactory(pokemon);
+  });
+  pokemonListElements.forEach((element) => {
+    pokemonDisplay.appendChild(element);
+  });
 });
 
 async function getPokemonNames() {
@@ -19,6 +27,8 @@ async function getPokemonNames() {
   return pokemonData.results;
 }
 
-function pokemonInfoFactory() {
-  
+function pokemonInfoFactory(pokemonData) {
+  const wrapperElement = document.createElement("li");
+  wrapperElement.textContent = pokemonData.name;
+  return wrapperElement;
 }
