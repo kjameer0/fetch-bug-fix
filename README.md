@@ -6,7 +6,7 @@ Break your problems into questions that you can research.
 
 ## Constraints
 
-1. Don't save data from the API locally (imagine there were millions of Pokémon).
+1. Don't save data from the API locally (imagine there were millions of Pokémon). That also means don't save the list of Pokemon to a variable and reuse it. We're practicing fetching multiple times.
 
 ## Goal
 
