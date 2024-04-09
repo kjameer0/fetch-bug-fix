@@ -16,7 +16,6 @@ Break your problems into questions that you can research.
 
 ## Bonus
 
-1. The page should start by saying "Type a search to find pokemon."
-2. Render each Pokémon's picture under its name.
-3. Create an empty view for when nothing comes up in the search or the page freshly loads.
-4. Limit updates to only trigger 300 milliseconds after the user stops typing(look into debouncing)
+1. Render each Pokémon's picture under its name.
+2. Create an empty view for when nothing comes up in the search or the page freshly loads.
+3. Limit updates (new fetches from API) to only trigger 300 milliseconds after the user stops typing(look into debouncing). If the user keeps typing before 300ms have passed, reset the timer.

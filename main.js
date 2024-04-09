@@ -7,13 +7,16 @@ window.addEventListener("load", () => {
 });
 
 let debounceInterval;
-searchInput.addEventListener("keyup", async () => {
-  const searchString = searchInput.value;
-  if (searchString.length === 0) {
+searchInput.addEventListener("keyup", async (e) => {
+  if (!(/\w/i.test(e.key))) {
     return;
   }
+  const searchString = searchInput.value;
   if (debounceInterval) {
     clearTimeout(debounceInterval);
+  }
+  if (searchString.length === 0) {
+    return;
   }
   debounceInterval = setTimeout(async () => {
     const pokemonList = await getPokemonNames();
@@ -28,9 +31,9 @@ searchInput.addEventListener("keyup", async () => {
     const pokemonListElements = filteredPokemonList.map((pokemon) => {
       return pokemonInfoFactory(pokemon);
     });
-
-    pokemonListElements.forEach((element) => {
-      pokemonDisplay.appendChild(element);
+    const fulfilledMons = await Promise.all(pokemonListElements);
+    fulfilledMons.forEach(async (element) => {
+      pokemonDisplay.appendChild(await element);
     });
   }, 300);
 });
@@ -43,9 +46,20 @@ async function getPokemonNames() {
   return pokemonData.results;
 }
 
-function pokemonInfoFactory(pokemonData) {
+async function pokemonInfoFactory(pokemonData) {
+  const pokemonInformationResponse = await fetch(pokemonData.url);
+  const pokemonDetails = await pokemonInformationResponse.json();
+
   const wrapperElement = document.createElement("li");
-  wrapperElement.textContent = pokemonData.name;
+
+  const nameHeading = document.createElement("h2");
+  nameHeading.textContent = pokemonData.name;
+
+  const imgElement = document.createElement("img");
+  imgElement.src = pokemonDetails.sprites.front_default;
+
+  wrapperElement.appendChild(nameHeading);
+  // wrapperElement.appendChild(imgElement);
   return wrapperElement;
 }
 
