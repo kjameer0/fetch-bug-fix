@@ -1,0 +1,10 @@
+:root {
+  color: white;
+}
+body {
+  background-color: black;
+  color: white;
+}
+#search-list li {
+  list-style: none;
+}

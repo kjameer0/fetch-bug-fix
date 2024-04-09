@@ -12,9 +12,11 @@ Break your problems into questions that you can research.
 
 1. Create an input field where a user can type a search query.
 2. Whenever the text changes in that input field, retrieve all Pokémon whose names contain the input text.
-3. Create a list of Pokémon that updates every time there is a change to the input text.
+3. Render a list of Pokémon names that updates every time there is a change to the input text.
 
 ## Bonus
 
-1. Render each Pokémon's picture under its name.
-2. Create an empty view for when nothing comes up in the search or the page freshly loads.
+1. The page should start by saying "Type a search to find pokemon."
+2. Render each Pokémon's picture under its name.
+3. Create an empty view for when nothing comes up in the search or the page freshly loads.
+4. Limit updates to only trigger 300 milliseconds after the user stops typing(look into debouncing)
